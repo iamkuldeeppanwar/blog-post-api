@@ -6,8 +6,12 @@ const auth = require("../middleware/auth");
 const multer = require("multer");
 const sharp = require("sharp");
 
+
+
 //Get All Blogs
 router.get("/allblogs", async (req, res) => {
+  let a = 1;
+
   try {
     const blog = await Blog.find();
 

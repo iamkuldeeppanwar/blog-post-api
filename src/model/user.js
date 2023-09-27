@@ -6,7 +6,12 @@ const Blog = require("./blog");
 
 const userSchema = new mongoose.Schema(
   {
-    name: {
+    firstName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    lastName: {
       type: String,
       required: true,
       trim: true,
@@ -42,10 +47,10 @@ const userSchema = new mongoose.Schema(
         },
       },
     ],
-    photo: {
-      type: String,
-      default: "default.jpeg",
-    },
+    // photo: {
+    //   type: String,
+    //   default: "default.jpeg",
+    // },
     createdAt: {
       type: Date,
       default: Date.now,
@@ -103,7 +108,7 @@ userSchema.statics.findByCredentials = async (email, password) => {
   return user;
 };
 
-//Delete user blogs when user is remove
+//Delete user blogs when user is removed
 userSchema.pre("remove", async function (next) {
   const user = this;
   await Blog.deleteMany({ owner: user._id });
